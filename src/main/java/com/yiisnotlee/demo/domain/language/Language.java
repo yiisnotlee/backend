@@ -10,7 +10,7 @@ import lombok.Setter;
 @Table(name = "languages")
 @Getter
 @Setter
-public class Languages {
+public class Language {
 
     @Id
     private String code;

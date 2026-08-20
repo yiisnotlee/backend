@@ -2,9 +2,13 @@ package com.yiisnotlee.demo.domain.profile;
 
 import com.yiisnotlee.demo.domain.language.Language;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "profile_translations", uniqueConstraints = @UniqueConstraint(columnNames = {"profile_id", "language_code"}))
+@Getter
+@Setter
 public class ProfileTranslation {
 
     @Id

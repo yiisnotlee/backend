@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "profile")
@@ -22,4 +24,7 @@ public class Profile {
     private BigDecimal gpa;
     private String profileUrl;
     private String avatarUrl;
+
+    @OneToMany(mappedBy = "profile")
+    private List<ProfileTranslation> translations = new ArrayList<>();
 }

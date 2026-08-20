@@ -54,4 +54,7 @@ public class Project {
     )
     private Set<TechStack> techStacks = new HashSet<>();
 
+    @OneToMany(mappedBy = "project")
+    private List<ProjectTranslation> translations = new ArrayList<>();
+
 }

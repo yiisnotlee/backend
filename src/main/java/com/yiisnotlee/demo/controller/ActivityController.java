@@ -1,8 +1,8 @@
 package com.yiisnotlee.demo.controller;
 
-import com.yiisnotlee.demo.domain.project.Project;
-import com.yiisnotlee.demo.dto.ProjectResponse;
-import com.yiisnotlee.demo.repository.ProjectRepository;
+import com.yiisnotlee.demo.domain.activity.Activity;
+import com.yiisnotlee.demo.dto.ActivityResponse;
+import com.yiisnotlee.demo.repository.ActivityRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,23 +14,23 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class ProjectController {
+public class ActivityController {
 
-    private final ProjectRepository projectRepository;
+    private final ActivityRepository activityRepository;
 
-    public ProjectController(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public ActivityController(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
     }
 
-    @GetMapping("/api/projects")
+    @GetMapping("/api/activities")
     @Transactional(readOnly = true)
-    public List<ProjectResponse> getProjects(
+    public List<ActivityResponse> getActivities(
             @RequestParam(defaultValue = "ko") String language) {
 
-        List<Project> projects = projectRepository.findAll();
+        List<Activity> activities = activityRepository.findAll();
 
-        return projects.stream()
-                .map(p -> new ProjectResponse(p, language))
+        return activities.stream()
+                .map(p -> new ActivityResponse(p, language))
                 .collect(Collectors.toList());
     }
 }

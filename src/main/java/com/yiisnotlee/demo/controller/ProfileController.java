@@ -1,8 +1,8 @@
 package com.yiisnotlee.demo.controller;
 
-import com.yiisnotlee.demo.domain.project.Project;
-import com.yiisnotlee.demo.dto.ProjectResponse;
-import com.yiisnotlee.demo.repository.ProjectRepository;
+import com.yiisnotlee.demo.domain.profile.Profile;
+import com.yiisnotlee.demo.dto.ProfileResponse;
+import com.yiisnotlee.demo.repository.ProfileRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,23 +14,23 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class ProjectController {
+public class ProfileController {
 
-    private final ProjectRepository projectRepository;
+    private final ProfileRepository profileRepository;
 
-    public ProjectController(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public ProfileController(ProfileRepository profileRepository) {
+        this.profileRepository = profileRepository;
     }
 
-    @GetMapping("/api/projects")
+    @GetMapping("/api/profiles")
     @Transactional(readOnly = true)
-    public List<ProjectResponse> getProjects(
+    public List<ProfileResponse> getProfiles(
             @RequestParam(defaultValue = "ko") String language) {
 
-        List<Project> projects = projectRepository.findAll();
+        List<Profile> profiles = profileRepository.findAll();
 
-        return projects.stream()
-                .map(p -> new ProjectResponse(p, language))
+        return profiles.stream()
+                .map(p -> new ProfileResponse(p, language))
                 .collect(Collectors.toList());
     }
 }

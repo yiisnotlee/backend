@@ -15,7 +15,7 @@ public class ProjectResponse {
     private String subtitle;
     private String description;
 
-    public ProjectResponse(Project project) {
+    public ProjectResponse(Project project, String langCode) {
         this.id = project.getId();
         this.githubUrl = project.getGithubUrl();
         this.roles = project.getRoles();

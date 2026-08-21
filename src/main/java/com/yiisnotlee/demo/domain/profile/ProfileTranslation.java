@@ -28,4 +28,10 @@ public class ProfileTranslation {
     private String schoolName;
     private String major;
     private String address;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(columnDefinition = "TEXT")
+    private String introduction;
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "profile_translations", uniqueConstraints = @UniqueConstraint(columnNames = {"profile_id", "language_code"}))
 @Getter
@@ -28,6 +30,7 @@ public class ProfileTranslation {
     private String schoolName;
     private String major;
     private String address;
+    private String tags;
 
     @Column(columnDefinition = "TEXT")
     private String description;

@@ -4,6 +4,8 @@ import com.yiisnotlee.demo.domain.profile.Profile;
 import lombok.Getter;
 
 import java.math.BigDecimal; // 🌟 BigDecimal 임포트 추가됨!
+import java.util.Arrays;
+import java.util.List;
 
 @Getter
 public class ProfileResponse {
@@ -22,6 +24,7 @@ public class ProfileResponse {
     private String address;
     private String description;
     private String introduction;
+    private List<String> tags;
 
     public ProfileResponse(Profile profile, String langCode) {
         this.id = profile.getId();
@@ -44,6 +47,9 @@ public class ProfileResponse {
                         this.address = translation.getAddress();
                         this.description = translation.getDescription();
                         this.introduction = translation.getIntroduction();
+                        if (translation.getTags() != null) {
+                            this.tags = Arrays.asList(translation.getTags().split(","));
+                        }
                     });
         }
     }

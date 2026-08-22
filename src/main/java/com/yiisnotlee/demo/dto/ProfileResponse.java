@@ -4,6 +4,8 @@ import com.yiisnotlee.demo.domain.profile.Profile;
 import lombok.Getter;
 
 import java.math.BigDecimal; // 🌟 BigDecimal 임포트 추가됨!
+import java.util.Arrays;
+import java.util.List;
 
 @Getter
 public class ProfileResponse {
@@ -12,17 +14,18 @@ public class ProfileResponse {
     private String phone;
     private String githubUrl;
     private String techblogUrl;
-    private BigDecimal gpa; // 🌟 Double에서 BigDecimal로 수정됨!
+    private BigDecimal gpa;
     private String avatarUrl;
 
-    // 다국어(번역) 필드들
     private String name;
     private String headline;
     private String schoolName;
     private String major;
     private String address;
+    private String description;
+    private String introduction;
+    private List<String> tags;
 
-    // 🌟 생성자에서 langCode를 받도록 수정됨
     public ProfileResponse(Profile profile, String langCode) {
         this.id = profile.getId();
         this.email = profile.getEmail();
@@ -32,7 +35,6 @@ public class ProfileResponse {
         this.gpa = profile.getGpa();
         this.avatarUrl = profile.getAvatarUrl();
 
-        // 🌟 "ko" 하드코딩 대신 밖에서 받은 langCode로 번역본 찾기
         if (profile.getTranslations() != null) {
             profile.getTranslations().stream()
                     .filter(t -> langCode.equals(t.getLanguage().getCode()))
@@ -43,6 +45,11 @@ public class ProfileResponse {
                         this.schoolName = translation.getSchoolName();
                         this.major = translation.getMajor();
                         this.address = translation.getAddress();
+                        this.description = translation.getDescription();
+                        this.introduction = translation.getIntroduction();
+                        if (translation.getTags() != null) {
+                            this.tags = Arrays.asList(translation.getTags().split(","));
+                        }
                     });
         }
     }
